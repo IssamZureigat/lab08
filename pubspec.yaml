@@ -36,12 +36,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  audioplayers: ^1.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  audioplayers: ^0.20.1
     
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -69,6 +69,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
+  #   - sounds/mpTest.mp3
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

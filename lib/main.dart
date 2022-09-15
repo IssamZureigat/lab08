@@ -1,14 +1,27 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
-  // var audio = AudioPlayer();
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var audio = AudioPlayer();
+
   bool isplaying = false;
+
   Duration duration = Duration.zero;
+
   Duration position = Duration.zero;
 
   @override
@@ -71,25 +84,28 @@ class MyApp extends StatelessWidget {
                       icon: Icon(isplaying ? Icons.pause : Icons.play_arrow),
                       iconSize: 50,
                       onPressed: () async {
+                        String currentFile = File(Directory.current.path)
+                            .toString()
+                            .substring(7, 101);
+                        print("currentFile = ${currentFile}");
+                        String directUserPath = "${currentFile}\\assets\\sounds\\mpTest.mp3";
+
                         if (isplaying) {
-                          // await audioplayer.pause;
+                          print("pausing");
+                          await audio.pause;
                         } else {
-                          String URL =
-                              "https://www.youtube.com/watch?v=VT1-sitWRtY";
-                          // audioplayer.play(URL);
+                          print("playing");
+                          await audio.setSourceDeviceFile(directUserPath);
+                          await audio.resume();
                         }
+                        isplaying = !isplaying;
+                        print("isPlaying = $isplaying");
+                        print("Path = $directUserPath");
                       },
                     ),
                   ),
-
-
-
-
-                  
                 ],
               ),
-
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -146,16 +162,8 @@ class MyApp extends StatelessWidget {
                       },
                     ),
                   ),
-
-
-
-
-                  
                 ],
               )
-           
-           
-           
             ],
           )),
     );
